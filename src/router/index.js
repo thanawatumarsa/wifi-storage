@@ -4,6 +4,7 @@ import Login from '@/components/login'
 import Register from '@/components/register'
 import main from '@/components/main'
 import dashboard from '@/components/dashboard'
+import aplists from '@/components/listsAccessPoint'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: dashboard
+    },
+    {
+      path: '/aplists',
+      name: 'aplists',
+      component: aplists
     }
   ]
 })

@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="dashboard">
     <div class="row">
-      <each-project :wifiInfo="wifiInfo"></each-project>
+      <each-project :wifiInfo="wifiInfo" :toAccessPoint="toAccessPoint" :removeProject="removeProject"></each-project>
     <div class="col-xs-6 col-md-3">
-      <a href="#" class="thumbnail" data-toggle="modal" data-target="#basicModal">
-        +
-      </a>
+      <div href="#" class="thumbnail" data-toggle="modal" data-target="#basicModal" style="cursor:pointer">
+        <br><img alt="" src="../assets/plus-button.png" width="18%">
+      </div>
     </div>
   </div>
   <!-- Add Project -->
@@ -38,7 +38,7 @@
 import eachProject from './eachProject'
 
 export default {
-  props: ['addProject', 'newProject', 'wifiInfo'],
+  props: ['addProject', 'newProject', 'wifiInfo', 'removeProject', 'toAccessPoint'],
   components: {
     eachProject
   }
@@ -47,10 +47,15 @@ export default {
 
 <style lang="css">
 .thumbnail {
-  height: 100px;
+  height: 90px;
 }
 .dashboard {
   margin-top: 8%
+}
+.card {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
 h4 {
   text-align: left;

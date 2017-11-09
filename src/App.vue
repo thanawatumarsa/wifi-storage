@@ -2,7 +2,7 @@
   <div id="app" class="">
     <navbar :test="test" :signout="signout"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :addProject="addProject" :newProject="newProject" :changePage="changePage"
+      <router-view :wifiInfo="wifiInfo" :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :toAccessPoint="toAccessPoint" :removeProject="removeProject" :addProject="addProject" :newProject="newProject" :changePage="changePage"
       :newRegister = "newRegister" :register = "register" :dataLogin="dataLogin" :signin="signin"></router-view>
     </div>
   </div>
@@ -40,14 +40,21 @@ export default {
         conpass: '',
         email: ''
       },
+      newAccessPoint: {
+        apName: '',
+        serial: '',
+        mac: '',
+        location: ''
+      },
       dataLogin: {
         email: '',
         pass: ''
       },
       newProject: {
-        projectName: ''
+        projectName: '',
+        accesspoint: ''
       },
-      tempLog: 0
+      tempIndex: ''
     }
   },
   components: {
@@ -137,10 +144,26 @@ export default {
     addProject: function () {
       wifiInfoRef.push(this.newProject)
       this.newProject.projectName = ''
+      this.newProject.accesspoint = ''
+    },
+    removeProject: function (project) {
+      wifiInfoRef.child(project['.key']).remove()
     },
     changePage: function (page) {
       var vm = this
       vm.$router.push(page)
+    },
+    toAccessPoint: function (index) {
+      var vm = this
+      vm.$router.push('/aplists')
+      vm.tempIndex = index
+    },
+    addAccessPoint: function (wifi, index) {
+      wifiInfoRef.child(wifi[index]['.key']).child('accesspoint').push(this.newAccessPoint)
+      this.newAccessPoint.apName = ''
+      this.newAccessPoint.serial = ''
+      this.newAccessPoint.mac = ''
+      this.newAccessPoint.location = ''
     }
   },
   mounted () {
