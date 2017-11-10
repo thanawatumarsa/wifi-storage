@@ -2,8 +2,10 @@
   <div id="app" class="">
     <navbar :test="test" :signout="signout"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :toAccessPoint="toAccessPoint" :removeProject="removeProject" :addProject="addProject" :newProject="newProject" :changePage="changePage"
-      :newRegister = "newRegister" :register = "register" :dataLogin="dataLogin" :signin="signin"></router-view>
+      <router-view :wifiInfo="wifiInfo" :editAp="editAp" :removeAp="removeAp" :addAccessPoint="addAccessPoint"
+      :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
+      :addProject="addProject" :newProject="newProject" :changePage="changePage":newRegister = "newRegister"
+      :register = "register" :dataLogin="dataLogin" :signin="signin" :editaccesspoint="editaccesspoint"></router-view>
     </div>
   </div>
 </template>
@@ -53,6 +55,12 @@ export default {
       newProject: {
         projectName: '',
         accesspoint: ''
+      },
+      editaccesspoint: {
+        apName: '',
+        serial: '',
+        mac: '',
+        location: ''
       },
       tempIndex: ''
     }
@@ -164,6 +172,16 @@ export default {
       this.newAccessPoint.serial = ''
       this.newAccessPoint.mac = ''
       this.newAccessPoint.location = ''
+      console.log(wifi)
+    },
+    editAp: function (wifi, test) {
+      this.editaccesspoint.apName = wifi.apName
+      this.editaccesspoint.serial = wifi.serial
+      this.editaccesspoint.mac = wifi.mac
+      this.editaccesspoint.location = wifi.location
+    },
+    removeAp: function (index) {
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).remove()
     }
   },
   mounted () {
