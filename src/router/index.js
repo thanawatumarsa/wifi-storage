@@ -5,6 +5,7 @@ import Register from '@/components/register'
 import main from '@/components/main'
 import dashboard from '@/components/dashboard'
 import aplists from '@/components/listsAccessPoint'
+import selectAccessPoint from '@/components/selectAccessPoint'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/aplists',
       name: 'aplists',
       component: aplists
+    },
+    {
+      path: '/selectAP',
+      name: 'selectAccessPoint',
+      component: selectAccessPoint
     }
   ]
 })

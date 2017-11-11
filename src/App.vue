@@ -2,8 +2,8 @@
   <div id="app" class="">
     <navbar :test="test" :signout="signout"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :editAp="editAp" :removeAp="removeAp" :addAccessPoint="addAccessPoint"
-      :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
+      <router-view :wifiInfo="wifiInfo" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation" :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp" :addAccessPoint="addAccessPoint"
+      :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
       :addProject="addProject" :newProject="newProject" :changePage="changePage":newRegister = "newRegister"
       :register = "register" :dataLogin="dataLogin" :signin="signin" :editaccesspoint="editaccesspoint"></router-view>
     </div>
@@ -46,7 +46,9 @@ export default {
         apName: '',
         serial: '',
         mac: '',
-        location: ''
+        location: '',
+        channel: '',
+        testLocation: ''
       },
       dataLogin: {
         email: '',
@@ -60,9 +62,17 @@ export default {
         apName: '',
         serial: '',
         mac: '',
-        location: ''
+        location: '',
+        channel: ''
       },
-      tempIndex: ''
+      newTestLocation: {
+        location: '',
+        dbm: ''
+      },
+      tempIndex: '',
+      apIndex: '',
+      wifidetail: '',
+      locationindex: ''
     }
   },
   components: {
@@ -118,7 +128,6 @@ export default {
           if (firebaseUser.emailVerified) {
             alert('Welcome')
             console.log('email is verify')
-            console.log(firebaseUser.uid)
             router.push('/dashboard')
           } else {
             console.log('Email is not verified')
@@ -172,22 +181,46 @@ export default {
       this.newAccessPoint.serial = ''
       this.newAccessPoint.mac = ''
       this.newAccessPoint.location = ''
-      console.log(wifi)
+      this.newAccessPoint.channel = ''
     },
-    editAp: function (wifi, test) {
+    editAp: function (wifi, index) {
       this.editaccesspoint.apName = wifi.apName
       this.editaccesspoint.serial = wifi.serial
       this.editaccesspoint.mac = wifi.mac
       this.editaccesspoint.location = wifi.location
+      this.editaccesspoint.channel = wifi.channel
+      this.addApIndex(index)
+    },
+    addApIndex: function (index) {
+      this.apIndex = index
+    },
+    editApSave: function (wifi, index) {
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).update({apName: this.editaccesspoint.apName})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).update({serial: this.editaccesspoint.serial})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).update({mac: this.editaccesspoint.mac})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).update({location: this.editaccesspoint.location})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).update({channel: this.editaccesspoint.channel})
     },
     removeAp: function (index) {
       wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(index).remove()
+    },
+    apDetail: function (wifi, index) {
+      this.wifidetail = wifi
+      this.locationindex = index
+    },
+    addTestLocation: function (wifi) {
+      console.log(this.locationindex)
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').push(this.newTestLocation)
+      this.newTestLocation.location = ''
+      this.newTestLocation.dbm = ''
+    },
+    removeTestLocation: function (index) {
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).remove()
     }
   },
   mounted () {
     var vm = this
     vm.$router.push('/login')
-    console.log(this.wifiInfo)
   }
 }
 </script>
