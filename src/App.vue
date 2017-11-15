@@ -2,8 +2,10 @@
   <div id="app" class="">
     <navbar :test="test" :signout="signout"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation" :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp" :addAccessPoint="addAccessPoint"
-      :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
+      <router-view :wifiInfo="wifiInfo" :editLoSave="editLoSave" :testlocationindex="testlocationindex" :editTestLo="editTestLo"
+      :editTestLocation="editTestLocation" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation"
+      :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp"
+      :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
       :addProject="addProject" :newProject="newProject" :changePage="changePage":newRegister = "newRegister"
       :register = "register" :dataLogin="dataLogin" :signin="signin" :editaccesspoint="editaccesspoint"></router-view>
     </div>
@@ -35,6 +37,10 @@ export default {
   data () {
     return {
       wifidata: [],
+      userInfo: {
+        uid: '',
+        email: ''
+      },
       newRegister: {
         fname: '',
         lname: '',
@@ -69,10 +75,15 @@ export default {
         location: '',
         dbm: ''
       },
+      editTestLocation: {
+        location: '',
+        dbm: ''
+      },
       tempIndex: '',
       apIndex: '',
       wifidetail: '',
-      locationindex: ''
+      locationindex: '',
+      testlocationindex: ''
     }
   },
   components: {
@@ -138,25 +149,24 @@ export default {
       })
     },
     signout: function () {
+      var router = this.$router
       Firebase.auth().signOut().then(function () {
         localStorage.clear()
         console.log('Signed Out')
+        router.push('login')
       }, function (error) {
         console.error('Sign Out Error', error)
       })
     },
     test: function () {
       var user = Firebase.auth().currentUser
-      var email, uid, emailVerified
       if (user != null) {
-        email = user.email
-        emailVerified = user.emailVerified
-        uid = user.uid
+        this.userInfo.email = user.email
+        this.userInfo.uid = user.uid
       }
-      console.log(email)
-      console.log(emailVerified)
-      console.log(uid)
-      console.log(wifiInfoRef)
+      console.log(user)
+      console.log(this.userInfo.uid)
+      console.log(this.userInfo.email)
     },
     addProject: function () {
       wifiInfoRef.push(this.newProject)
@@ -174,6 +184,7 @@ export default {
       var vm = this
       vm.$router.push('/aplists')
       vm.tempIndex = index
+      console.log(this.$route.path)
     },
     addAccessPoint: function (wifi, index) {
       wifiInfoRef.child(wifi[index]['.key']).child('accesspoint').push(this.newAccessPoint)
@@ -209,18 +220,42 @@ export default {
       this.locationindex = index
     },
     addTestLocation: function (wifi) {
-      console.log(this.locationindex)
       wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').push(this.newTestLocation)
+      this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
       this.newTestLocation.location = ''
       this.newTestLocation.dbm = ''
     },
     removeTestLocation: function (index) {
       wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).remove()
+      this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
+    },
+    editTestLo: function (wifi, index) {
+      this.editTestLocation.location = wifi.location
+      this.editTestLocation.dbm = wifi.dbm
+      this.addTestLoIndex(index)
+    },
+    editLoSave: function (wifi, index) {
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({location: this.editTestLocation.location})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({dbm: this.editTestLocation.dbm})
+      this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
+    },
+    addTestLoIndex: function (index) {
+      this.testlocationindex = index
     }
   },
   mounted () {
     var vm = this
-    vm.$router.push('/login')
+    if (this.$route.path === '/main') {
+      vm.$router.push('/main')
+    } else if (this.$route.path === '/dashboard') {
+      vm.$router.push('/dashboard')
+    } else if (this.$route.path === '/aplists') {
+      vm.$router.push('/aplists')
+    } else if (this.$route.path === '/selectAP') {
+      vm.$router.push('/selectAP')
+    } else {
+      vm.$router.push('/login')
+    }
   }
 }
 </script>

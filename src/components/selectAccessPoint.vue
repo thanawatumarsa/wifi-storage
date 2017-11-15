@@ -35,7 +35,7 @@
                 </th>
               </tr>
             </thead>
-            <each-test-location :wifidetail="wifidetail" :locationindex="locationindex" :removeTestLocation="removeTestLocation"></each-test-location>
+            <each-test-location :wifidetail="wifidetail" :locationindex="locationindex" :removeTestLocation="removeTestLocation" :editTestLocation="editTestLocation" :editTestLo="editTestLo" :testlocationindex="testlocationindex" :editLoSave="editLoSave"></each-test-location>
           </table>
     </div>
     <div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -57,7 +57,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button @click="reloadpage(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal">+ Add</button>
+          <button @click="addTestLocation(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal">+ Add</button>
         </div>
       </div>
     </div>
@@ -70,15 +70,11 @@
 import eachTestLocation from '@/components/eachTestLocation'
 
 export default {
-  props: ['wifidetail', 'addTestLocation', 'newTestLocation', 'locationindex', 'removeTestLocation'],
+  props: ['wifidetail', 'addTestLocation', 'newTestLocation', 'locationindex', 'removeTestLocation', 'editTestLocation', 'editTestLo', 'testlocationindex', 'editLoSave'],
   components: {
     eachTestLocation
   },
   methods: {
-    reloadpage: function (wifi) {
-      var vm = this
-      vm.addTestLocation(wifi)
-    }
   },
   mouted () {
   }
