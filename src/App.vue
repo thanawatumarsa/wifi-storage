@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="">
-    <navbar :test="test" :signout="signout"></navbar>
+    <navbar :test="test" :signout="signout" :chkAdmin="chkAdmin"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :editLoSave="editLoSave" :testlocationindex="testlocationindex" :editTestLo="editTestLo"
+      <router-view :wifiInfo="wifiInfo" :removeAccount="removeAccount" :users="users" :checkSignIn="checkSignIn" :editLoSave="editLoSave" :testlocationindex="testlocationindex" :editTestLo="editTestLo"
       :editTestLocation="editTestLocation" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation"
       :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp"
       :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
@@ -83,7 +83,9 @@ export default {
       apIndex: '',
       wifidetail: '',
       locationindex: '',
-      testlocationindex: ''
+      testlocationindex: '',
+      chkAdmin: false,
+      adminGetUID: ''
     }
   },
   components: {
@@ -123,6 +125,16 @@ export default {
         }
       })
     },
+    checkSignIn: function (email, pass) {
+      if (email === 'admin' && pass === 'g0H3ll0p1n3') {
+        var vm = this
+        this.chkAdmin = true
+        alert('Wellcome Admin!')
+        vm.$router.push('/dashboard')
+      } else {
+        this.signin()
+      }
+    },
     signin: function () {
       var router = this.$router
       Firebase.auth().signInWithEmailAndPassword(this.dataLogin.email, this.dataLogin.pass).catch(function (error) {
@@ -150,6 +162,9 @@ export default {
     },
     signout: function () {
       var router = this.$router
+      this.chkAdmin = false
+      this.userInfo.email = ''
+      this.userInfo.uid = ''
       Firebase.auth().signOut().then(function () {
         localStorage.clear()
         console.log('Signed Out')
@@ -157,6 +172,21 @@ export default {
       }, function (error) {
         console.error('Sign Out Error', error)
       })
+    },
+    removeAccount: function (index, user, email, pass) {
+      Firebase.auth().signInWithEmailAndPassword(email, pass).then(function () {
+        var unsubscribe = Firebase.auth().onAuthStateChanged(firebaseUser => {
+          console.log(firebaseUser.uid)
+          firebaseUser.delete().then(function () {
+            console.log('delete')
+          })
+        })
+        unsubscribe()
+      })
+      this.deleteUser(user, index)
+    },
+    deleteUser: function (user, index) {
+      userRef.child(user['.key']).remove()
     },
     test: function () {
       var user = Firebase.auth().currentUser

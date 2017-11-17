@@ -6,6 +6,7 @@ import main from '@/components/main'
 import dashboard from '@/components/dashboard'
 import aplists from '@/components/listsAccessPoint'
 import selectAccessPoint from '@/components/selectAccessPoint'
+import admin from '@/components/adminDashboard'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/selectAP',
       name: 'selectAccessPoint',
       component: selectAccessPoint
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: admin
     }
   ]
 })

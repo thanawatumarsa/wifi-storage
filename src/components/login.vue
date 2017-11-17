@@ -13,7 +13,7 @@
               <div class="form-group">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" v-model="dataLogin.pass">
               </div>
-              <input @click="signin" type="button" class="btn btn-primary btn-default btn-block" id="submit-login" name="submit-login" value="Login">
+              <input @click="checkSignIn(dataLogin.email, dataLogin.pass)" type="button" class="btn btn-primary btn-default btn-block" id="submit-login" name="submit-login" value="Login">
               <div class="left">
                 <a @click="changePage('/register')">Don't have an account?</a>
               </div>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['dataLogin', 'signin', 'changePage', 'wifiInfo'],
+  props: ['dataLogin', 'signin', 'changePage', 'wifiInfo', 'checkSignIn'],
   data () {
     return {
     }
