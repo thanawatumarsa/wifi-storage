@@ -4,7 +4,7 @@
       <each-project :wifiInfo="wifiInfo" :toAccessPoint="toAccessPoint" :removeProject="removeProject"></each-project>
     <div class="col-xs-6 col-md-3">
       <div href="#" class="thumbnail addProject" data-toggle="modal" data-target="#basicModal" style="cursor:pointer">
-        <h3>+ เพิ่มโปรเจค </h3>
+        <h3>+ New Project </h3>
       </div>
     </div>
   </div>

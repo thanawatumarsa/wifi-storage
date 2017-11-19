@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="col-md-12 apContent">
     <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
-    <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >เพิ่ม Access Point</button>
+    <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >New Access point</button>
     <hr>
     <div v-if="wifiInfo[tempIndex].accesspoint" class="tablecontrainer">
       <table class="table table">
@@ -24,7 +24,7 @@
               </th>
               <th>
                 <center>
-                ตำแหน่งที่ติดตั้ง
+                Position
                 </center>
               </th>
               <th>
@@ -34,7 +34,7 @@
               </th>
               <th>
                 <center>
-                ดูรายละเอียด
+                More Detail
                 </center>
               </th>
               <th>
@@ -49,7 +49,7 @@
         </table>
       </div>
       <div v-else class="col-md-12" style="margin-bottom:3%">
-        <h3>ไม่มีข้อมูล Access point</h3>
+        <h3>No information.</h3>
       </div>
 
       <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

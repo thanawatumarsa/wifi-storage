@@ -9,6 +9,7 @@
         </td>
         <td>
           <span @click="editTestLo(wifi, index)" class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#edittest" style="cursor:pointer"></span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <span @click="remove(wifi, index)" class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#remove" style="cursor:pointer"></span>
         </td>
         <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">

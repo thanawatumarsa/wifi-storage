@@ -3,8 +3,8 @@
     <div class="col-xs-12 col-md-4">
       <div class="nameap">
         <div class="cardContainer">
-          <h3>Access point name : <h3>
-          </h3>{{wifidetail.apName}}</h3><hr>
+          <h4 style="text-align:center">Access point name</h4>
+          <h3 style="text-align:center">{{wifidetail.apName}}</h3><hr>
           <h4>S/N : {{wifidetail.serial}}</h4>
           <h4>MAC : {{wifidetail.mac}}</h4>
           <h4>Location : {{wifidetail.location}}</h4>
@@ -12,17 +12,17 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-md-8 tablecard" style="margin-top:3%">
+    <div class="col-xs-12 col-md-8 tablecard" style="margin-top:3.1%">
         <div class="location">
-          <h3><center>ตารางแสดงการทดสอบสัญญาณ</center></h3><br>
-          <button data-toggle="modal" data-target="#addLocation" type="button" class="btn btn-primary" data-dismiss="modal" >เพิ่ม Location</button>
+          <h3><center>Signal testing information.</center></h3><br>
+          <button data-toggle="modal" data-target="#addLocation" type="button" class="btn btn-primary" data-dismiss="modal" >New location</button>
           <hr>
         </div>
         <div v-if="wifidetail.testLocation" class="">
           <div class="col-xs-8 col-md-8" style="margin-left:-2%">
             <div class="print">
               <a type="button" @click="myprint()" style="cursor:pointer ">
-                Print ข้อมูลการทดสอบ
+                Print report
               </a>
             </div>
           </div>
@@ -50,8 +50,8 @@
               <each-test-location :wifidetail="wifidetail" :locationindex="locationindex" :removeTestLocation="removeTestLocation" :editTestLocation="editTestLocation" :editTestLo="editTestLo" :testlocationindex="testlocationindex" :editLoSave="editLoSave" :print="print"></each-test-location>
             </table>
         </div>
-          <div v-else class="col-xs-12 col-md-12" style="margin-bottom:8.7%">
-            <h3>ไม่มีข้อมูลการทดสอบ</h3>
+          <div v-else class="col-xs-12 col-md-12" style="margin-bottom:8.3%">
+            <h3>No information.</h3>
           </div>
     </div>
     <div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
