@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="regPosition">
     <div class="col-md-4 col-md-offset-4 ">
-      <div class="cardReg">
+      <div class="regContent">
         <div class="cardContainer">
           <form>
             <div class="page-header">
@@ -27,7 +27,7 @@
             </div>
             <input @click="checkPass(newRegister.pass, newRegister.conpass)" class="btn btn-primary btn-default btn-block" id="submit-reg" type="button" name="submit-reg" value="Register">
             <div class="left">
-              <a @click="changePage('/login')">Or you have an account.</a>
+              <a @click="changePage('/login')" style="cursor:pointer">Or you have an account.</a>
             </div>
           </form>
         </div>
@@ -53,6 +53,9 @@ export default {
         this.register()
       }
     }
+  },
+  mounted () {
+    this.chkLogin = true
   }
 }
 </script>

@@ -8,10 +8,27 @@
           </p>
         </div>
         <p>
-          <div @click="removeProject(wifi, index)" class="delRight" href="#" style="cursor:pointer">
+          <div @click="removeTemp(wifi, index)" class="delRight" href="#" data-toggle="modal" data-target="#removeProject" style="cursor:pointer">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </div>
         </p>
+      </div>
+    </div>
+    <div class="modal fade" id="removeProject" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Remove Project</h4>
+          </div>
+          <div class="modal-header">
+            <h3>Are you sure to remove this Project?</h3>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+            <button  @click="removeProject(removeindex)" type="button" class="btn btn-primary" data-dismiss="modal">Remove</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -20,7 +37,17 @@
 
 <script>
 export default {
-  props: ['wifiInfo', 'removeProject', 'toAccessPoint']
+  props: ['wifiInfo', 'removeProject', 'toAccessPoint'],
+  data () {
+    return {
+      removeindex: ''
+    }
+  },
+  methods: {
+    removeTemp: function (wifi, index) {
+      this.removeindex = index
+    }
+  }
 }
 </script>
 

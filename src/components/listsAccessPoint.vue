@@ -1,56 +1,56 @@
 <template lang="html">
-  <div class="col-md-12">
-    <div class="allcontent">
-      <div class="nameproject">
-        <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
-        <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" style="float:left">เพิ่ม Access Point</button>
+  <div class="col-md-12 apContent">
+    <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
+    <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >เพิ่ม Access Point</button>
+    <hr>
+    <div v-if="wifiInfo[tempIndex].accesspoint" class="tablecontrainer">
+      <table class="table table">
+          <thead>
+            <tr>
+              <th data-toggle="modal" data-target="#basicModal">
+                <center>
+                AP Name
+                </center>
+              </th>
+              <th>
+                <center>
+                S/N
+                </center>
+              </th>
+              <th>
+                <center>
+                MAC Address
+                </center>
+              </th>
+              <th>
+                <center>
+                ตำแหน่งที่ติดตั้ง
+                </center>
+              </th>
+              <th>
+                <center>
+                  Channel
+                </center>
+              </th>
+              <th>
+                <center>
+                ดูรายละเอียด
+                </center>
+              </th>
+              <th>
+                <center>
+                </center>
+              </th>
+            </tr>
+          </thead>
+          <each-access-point :wifiInfo="wifiInfo" :tempIndex="tempIndex" :removeAp="removeAp" :editAp="editAp"
+          :editaccesspoint="editaccesspoint" :apIndex="apIndex" :editApSave="editApSave" :wifidetail="wifidetail"
+          :apDetail="apDetail"></each-access-point>
+        </table>
       </div>
-      <div class="tablecontrainer">
-        <table class="table table">
-            <thead>
-              <tr>
-                <th data-toggle="modal" data-target="#basicModal">
-                  <center>
-                  AP Name
-                  </center>
-                </th>
-                <th>
-                  <center>
-                  S/N
-                  </center>
-                </th>
-                <th>
-                  <center>
-                  MAC Address
-                  </center>
-                </th>
-                <th>
-                  <center>
-                  ตำแหน่งที่ติดตั้ง
-                  </center>
-                </th>
-                <th>
-                  <center>
-                    Channel
-                  </center>
-                </th>
-                <th>
-                  <center>
-                  ดูรายละเอียด
-                  </center>
-                </th>
-                <th>
-                  <center>
-                  </center>
-                </th>
-              </tr>
-            </thead>
-            <each-access-point :wifiInfo="wifiInfo" :tempIndex="tempIndex" :removeAp="removeAp" :editAp="editAp"
-            :editaccesspoint="editaccesspoint" :apIndex="apIndex" :editApSave="editApSave" :wifidetail="wifidetail"
-            :apDetail="apDetail"></each-access-point>
-          </table>
+      <div v-else class="col-md-12" style="margin-bottom:3%">
+        <h3>ไม่มีข้อมูล Access point</h3>
       </div>
-    </div>
 
       <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="modal-dialog">
@@ -93,7 +93,7 @@
 import eachAccessPoint from './eachAccessPoint'
 
 export default {
-  props: ['wifiInfo', 'tempIndex', 'newAccessPoint', 'addAccessPoint', 'removeAp', 'editAp', 'editaccesspoint', 'editApSave', 'apIndex', 'wifidetail', 'apDetail'],
+  props: ['wifiInfo', 'tempIndex', 'newAccessPoint', 'addAccessPoint', 'removeAp', 'editAp', 'editaccesspoint', 'editApSave', 'apIndex', 'wifidetail', 'apDetail', 'print'],
   components: {
     eachAccessPoint
   }
@@ -102,7 +102,7 @@ export default {
 
 <style lang="css">
 .allcontent {
-  margin-top: 5%;
+  margin-top: -5%;
 }
 .tablecontrainer {
   margin-top: 5%;
@@ -110,5 +110,13 @@ export default {
 .nameproject {
   margin-bottom: 3%;
   float: left;
+}
+.apContent {
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-top: 5%;
+  float: center;
+  background-color: white;
 }
 </style>

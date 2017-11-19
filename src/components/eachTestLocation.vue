@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  props: ['wifidetail', 'locationindex', 'removeTestLocation', 'editTestLocation', 'editTestLo', 'testlocationindex', 'editLoSave'],
+  props: ['wifidetail', 'locationindex', 'removeTestLocation', 'editTestLocation', 'editTestLo', 'testlocationindex', 'editLoSave', 'print'],
   data () {
     return {
       removeindex: '',

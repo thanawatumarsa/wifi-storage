@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="">
-    <navbar :test="test" :signout="signout" :chkAdmin="chkAdmin"></navbar>
+  <div id="app">
+    <navbar :test="test" :signout="signout" :chkAdmin="chkAdmin" :chkLog="chkLog"></navbar>
     <div class="container">
-      <router-view :wifiInfo="wifiInfo" :removeAccount="removeAccount" :users="users" :checkSignIn="checkSignIn" :editLoSave="editLoSave" :testlocationindex="testlocationindex" :editTestLo="editTestLo"
+      <router-view :wifiInfo="wifiInfo" :print="print" :chkLogin="chkLogin" :removeAccount="removeAccount" :users="users" :checkSignIn="checkSignIn" :editLoSave="editLoSave" :testlocationindex="testlocationindex" :editTestLo="editTestLo"
       :editTestLocation="editTestLocation" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation"
       :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp"
       :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
@@ -15,6 +15,7 @@
 <script>
 import Firebase from 'firebase'
 import Navbar from '@/components/navbar'
+import printjs from 'print-js'
 
 let config = {
   apiKey: 'AIzaSyCq9XSREG-KQz4IZgmmbcSpRYgz4HK-KpQ',
@@ -85,7 +86,16 @@ export default {
       locationindex: '',
       testlocationindex: '',
       chkAdmin: false,
-      adminGetUID: ''
+      adminGetUID: '',
+      chkLog: false,
+      temppp: [
+        {
+          test: '-KyfJTmftsY6ScXWpvhK'
+        },
+        {
+          test: '-KyfVTBG597fkdphXDUR'
+        }
+      ]
     }
   },
   components: {
@@ -129,7 +139,7 @@ export default {
       if (email === 'admin' && pass === 'g0H3ll0p1n3') {
         var vm = this
         this.chkAdmin = true
-        alert('Wellcome Admin!')
+        alert('Welcome Admin!')
         vm.$router.push('/dashboard')
       } else {
         this.signin()
@@ -163,6 +173,7 @@ export default {
     signout: function () {
       var router = this.$router
       this.chkAdmin = false
+      this.chkLog = false
       this.userInfo.email = ''
       this.userInfo.uid = ''
       Firebase.auth().signOut().then(function () {
@@ -190,6 +201,7 @@ export default {
     },
     test: function () {
       var user = Firebase.auth().currentUser
+      console.log(this.wifidetail.testLocation)
       if (user != null) {
         this.userInfo.email = user.email
         this.userInfo.uid = user.uid
@@ -203,8 +215,8 @@ export default {
       this.newProject.projectName = ''
       this.newProject.accesspoint = ''
     },
-    removeProject: function (project) {
-      wifiInfoRef.child(project['.key']).remove()
+    removeProject: function (index) {
+      wifiInfoRef.child(this.wifiInfo[index]['.key']).remove()
     },
     changePage: function (page) {
       var vm = this
@@ -271,26 +283,44 @@ export default {
     },
     addTestLoIndex: function (index) {
       this.testlocationindex = index
+    },
+    chkLogin: function () {
+      this.chkLog = true
+    },
+    print: function () {
+      printjs({printable: this.wifiInfo[this.tempIndex], properties: [this.wifiInfo[this.tempIndex].projectName], type: 'json', header: this.wifiInfo[this.tempIndex].projectName})
     }
   },
   mounted () {
     var vm = this
     if (this.$route.path === '/main') {
+      this.chkLog = true
       vm.$router.push('/main')
     } else if (this.$route.path === '/dashboard') {
+      this.chkLog = true
+      console.log(this.chkLog)
       vm.$router.push('/dashboard')
     } else if (this.$route.path === '/aplists') {
+      this.chkLog = true
       vm.$router.push('/aplists')
     } else if (this.$route.path === '/selectAP') {
+      this.chkLog = true
       vm.$router.push('/selectAP')
+    } else if (this.$route.path === '/admin') {
+      this.chkLog = true
+      vm.$router.push('/admin')
     } else {
       vm.$router.push('/login')
+      this.chkLog = false
     }
   }
 }
 </script>
 
 <style>
+body {
+  background-color: #F2F2F2;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -312,6 +342,7 @@ export default {
   font-size: 80%;
 }
 .cardLog {
+    background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
@@ -328,6 +359,28 @@ export default {
 }
 .cardContainer {
     padding: 2px 16px;
-    padding-bottom: 5%;
+    padding-bottom: 10%;
+    margin-bottom: 4%;
+}
+.cardlogContainer {
+    padding: 2px 16px;
+    padding-bottom: 3%;
+    margin-bottom: 2%;
+}
+.loginContent {
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-top: 5%;
+  float: center;
+  background-color: white;
+}
+.regContent {
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-top: 5%;
+  float: center;
+  background-color: white;
 }
 </style>

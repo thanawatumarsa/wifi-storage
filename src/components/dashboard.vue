@@ -3,8 +3,8 @@
     <div class="row">
       <each-project :wifiInfo="wifiInfo" :toAccessPoint="toAccessPoint" :removeProject="removeProject"></each-project>
     <div class="col-xs-6 col-md-3">
-      <div href="#" class="thumbnail" data-toggle="modal" data-target="#basicModal" style="cursor:pointer">
-        <br><img alt="" src="../assets/plus-button.png" width="18%">
+      <div href="#" class="thumbnail addProject" data-toggle="modal" data-target="#basicModal" style="cursor:pointer">
+        <h3>+ เพิ่มโปรเจค </h3>
       </div>
     </div>
   </div>
@@ -38,9 +38,12 @@
 import eachProject from './eachProject'
 
 export default {
-  props: ['addProject', 'newProject', 'wifiInfo', 'removeProject', 'toAccessPoint'],
+  props: ['addProject', 'newProject', 'wifiInfo', 'removeProject', 'toAccessPoint', 'chkLogin'],
   components: {
     eachProject
+  },
+  mounted () {
+    this.chkLogin()
   }
 }
 </script>
@@ -56,6 +59,13 @@ export default {
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+}
+.addProject {
+  color: white;
+  background-color: #337AB7;
+}
+.addProject:hover {
+  background-color: #30739c;
 }
 h4 {
   text-align: left;

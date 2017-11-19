@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="tablecontrainer">
+  <div class="col-md-8 col-md-offset-2 adminContent">
+    <h3>User Managment</h3><hr><br>
       <table class="table table">
           <thead>
             <tr>
@@ -27,7 +27,6 @@
           </thead>
           <user-data :users="users" :removeAccount="removeAccount"></user-data>
         </table>
-    </div>
   </div>
 </template>
 
@@ -35,7 +34,7 @@
 import userData from '@/components/userData'
 
 export default {
-  props: ['users', 'removeAccount'],
+  props: ['users', 'removeAccount', 'chkLogin'],
   components: {
     userData
   }
@@ -43,7 +42,12 @@ export default {
 </script>
 
 <style lang="css">
-.tablecontrainer {
+
+.adminContent {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  transition: 0.3s;
   margin-top: 5%;
+  float: center;
 }
 </style>

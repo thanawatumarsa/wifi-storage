@@ -5,10 +5,11 @@ import App from './App'
 import router from './router'
 
 var VueFire = require('vuefire')
+var printjs = require('print-js')
 
 Vue.config.productionTip = false
 
-Vue.use(VueFire)
+Vue.use(VueFire, printjs)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
