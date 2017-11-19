@@ -49,5 +49,6 @@ export default {
   transition: 0.3s;
   margin-top: 5%;
   float: center;
+  background-color: white;
 }
 </style>
