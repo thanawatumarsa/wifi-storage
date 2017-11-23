@@ -47,7 +47,7 @@ export default {
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   transition: 0.3s;
-  margin-top: 5%;
+  margin-top: 3%;
   float: center;
   background-color: white;
 }

@@ -104,12 +104,14 @@ export default {
   methods: {
     register: function () {
       userRef.push(this.newRegister)
-      this.authFirebase(this.newRegister.email, this.newRegister.pass)
+      var tempemail = this.newRegister.email + ('@gmail.com')
+      this.authFirebase(tempemail, this.newRegister.pass)
       this.newRegister.fname = ''
       this.newRegister.lname = ''
       this.newRegister.pass = ''
       this.newRegister.conpass = ''
       this.newRegister.email = ''
+      tempemail = ''
     },
     authFirebase: function (email, pass) {
       var router = this.$router
@@ -262,10 +264,18 @@ export default {
       this.locationindex = index
     },
     addTestLocation: function (wifi) {
-      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').push(this.newTestLocation)
+      var tempdbm = {
+        location: '',
+        dbm: ''
+      }
+      tempdbm.location = this.newTestLocation.location
+      tempdbm.dbm = ('-') + this.newTestLocation.dbm
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').push(tempdbm)
       this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
       this.newTestLocation.location = ''
       this.newTestLocation.dbm = ''
+      tempdbm.location = ''
+      tempdbm.dbm = ''
     },
     removeTestLocation: function (index) {
       wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).remove()
@@ -319,7 +329,7 @@ export default {
 
 <style>
 body {
-  background-color: #F2F2F2;
+  background-color: white;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -335,6 +345,11 @@ body {
 }
 .loginPosition {
   margin-top: 10%
+}
+.left {
+  margin-top: 3%;
+  float: left;
+  font-size: 80%;
 }
 .left {
   margin-top: 3%;
@@ -360,7 +375,6 @@ body {
 .cardContainer {
     padding: 2px 16px;
     padding-bottom: 10%;
-    margin-bottom: 4%;
 }
 .cardlogContainer {
     padding: 2px 16px;

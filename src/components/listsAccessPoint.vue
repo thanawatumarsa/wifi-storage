@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="col-md-12 apContent">
+  <div class="col-md-12 adminContent">
     <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
     <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >New Access point</button>
     <hr>
@@ -61,26 +61,30 @@
           </div>
           <div class="modal-body">
             <form>
-                <div class="form-group">
-                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Name" v-model="newAccessPoint.apName">
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">*</span>
+                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Name" v-model="newAccessPoint.apName"><br>
                 </div>
                 <div class="form-group">
-                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Serial Number" v-model="newAccessPoint.serial">
+
                 </div>
                 <div class="form-group">
-                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="MAC Address" v-model="newAccessPoint.mac">
+                  <input type="text" maxlength="20" id="addProject" name="addProject" class="form-control" placeholder="Serial Number" v-model="newAccessPoint.serial">
                 </div>
                 <div class="form-group">
-                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="newAccessPoint.location">
+                  <input type="text" maxlength="17" id="addProject" name="addProject" class="form-control" placeholder="MAC Address" v-model="newAccessPoint.mac">
                 </div>
                 <div class="form-group">
-                  <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Channel" v-model="newAccessPoint.channel">
+                  <input type="text" maxlength="20" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="newAccessPoint.location">
+                </div>
+                <div class="form-group">
+                  <input type="number" id="addProject" name="addProject" class="form-control" placeholder="Channel" v-model="newAccessPoint.channel">
                 </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button @click="addAccessPoint(wifiInfo, tempIndex)" type="button" class="btn btn-primary" data-dismiss="modal">+ Add</button>
+            <button @click="addAccessPoint(wifiInfo, tempIndex)" type="button" class="btn btn-primary" data-dismiss="modal" :disabled="newAccessPoint.apName == ''">+ Add</button>
           </div>
         </div>
       </div>

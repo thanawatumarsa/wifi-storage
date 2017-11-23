@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-md-8 tablecard" style="margin-top:3.1%">
+    <div class="col-xs-12 col-md-8 tablecard" style="margin-top:1.5%">
         <div class="location">
           <h3><center>Signal testing information.</center></h3><br>
           <button data-toggle="modal" data-target="#addLocation" type="button" class="btn btn-primary" data-dismiss="modal" >New location</button>
@@ -63,17 +63,21 @@
         </div>
         <div class="modal-body">
           <form>
-              <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">*</span>
                 <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="newTestLocation.location">
               </div>
               <div class="form-group">
-                <input type="text" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="newTestLocation.dbm">
+
+              </div>
+              <div class="form-group">
+                <input type="number" maxlength="3" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="newTestLocation.dbm">
               </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button @click="addTestLocation(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal">+ Add</button>
+          <button @click="addTestLocation(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal" :disabled="newTestLocation.location == ''">+ Add</button>
         </div>
       </div>
     </div>
@@ -103,20 +107,19 @@ export default {
   margin-top: 5%;
 }
 .nameap {
-  border: 2px solid #e6e6e6;
+  border: 1px solid #e6e6e6;
   border-radius: 5px;
   transition: 0.3s;
-  margin-top: 10%;
-  margin-left: -2.1%;
-  margin-right: -2.1%;
+  margin-top: 5%;
   float: center;
   background-color: white;
 }
 .tablecard {
-  border: 2px solid #e6e6e6;
+  border: 1px solid #e6e6e6;
   border-radius: 5px;
   transition: 0.3s;
-  margin-top: 10%;
+  margin-top: 5%;
+  float: center;
   background-color: white;
 }
 .location {
@@ -141,6 +144,8 @@ export default {
   }
   .nameap {
     float: center;
+    margin-right: -2.2%;
+    margin-left: -2.2%;
   }
 }
 </style>
