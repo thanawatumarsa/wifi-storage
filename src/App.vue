@@ -103,8 +103,9 @@ export default {
   },
   methods: {
     register: function () {
+      var tempemail = this.newRegister.email + ('@hellopine.com')
+      this.newRegister.email = tempemail
       userRef.push(this.newRegister)
-      var tempemail = this.newRegister.email + ('@gmail.com')
       this.authFirebase(tempemail, this.newRegister.pass)
       this.newRegister.fname = ''
       this.newRegister.lname = ''
@@ -396,5 +397,8 @@ body {
   margin-top: 5%;
   float: center;
   background-color: white;
+}
+hr {
+  border: 0.5px solid #a6a6a6;
 }
 </style>

@@ -44,7 +44,7 @@ export default {
 <style lang="css">
 
 .adminContent {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #a6a6a6;
   border-radius: 5px;
   transition: 0.3s;
   margin-top: 3%;

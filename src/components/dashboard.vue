@@ -85,6 +85,14 @@ export default {
   margin-top: 5%;
   margin-bottom: 5%;
 }
+.adminContent {
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-top: 3%;
+  float: center;
+  background-color: white;
+}
 h4 {
   text-align: left;
 }

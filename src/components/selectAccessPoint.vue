@@ -3,12 +3,17 @@
     <div class="col-xs-12 col-md-4">
       <div class="nameap">
         <div class="cardContainer">
+          <div class="col-xs-12 col-md-12">
+            <div class="" style="float:left; margin-top:1%;  margin-bottom:1%">
+            <a @click="changePage('/dashboard')" style="cursor:pointer">Dashboard</a> / <a @click="changePage('/aplists')" style="cursor:pointer">{{wifiInfo[tempIndex].projectName}}</a> / {{wifidetail.apName}}
+            </div>
+          </div><hr>
           <h4 style="text-align:center">Access point name</h4>
           <h3 style="text-align:center">{{wifidetail.apName}}</h3><hr>
-          <h4>S/N : {{wifidetail.serial}}</h4>
-          <h4>MAC : {{wifidetail.mac}}</h4>
-          <h4>Location : {{wifidetail.location}}</h4>
-          <h4>Channel : {{wifidetail.channel}}</h4>
+          <h4 style="text-align:center" >S/N : {{wifidetail.serial}}</h4>
+          <h4 style="text-align:center">MAC : {{wifidetail.mac}}</h4>
+          <h4 style="text-align:center">Location : {{wifidetail.location}}</h4>
+          <h4 style="text-align:center">Channel : {{wifidetail.channel}}</h4>
         </div>
       </div>
     </div>
@@ -50,7 +55,7 @@
               <each-test-location :wifidetail="wifidetail" :locationindex="locationindex" :removeTestLocation="removeTestLocation" :editTestLocation="editTestLocation" :editTestLo="editTestLo" :testlocationindex="testlocationindex" :editLoSave="editLoSave" :print="print"></each-test-location>
             </table>
         </div>
-          <div v-else class="col-xs-12 col-md-12" style="margin-bottom:8.3%">
+          <div v-else class="col-xs-12 col-md-12" style="margin-bottom:4.53%">
             <h3>No information.</h3>
           </div>
     </div>
@@ -90,13 +95,17 @@
 import eachTestLocation from '@/components/eachTestLocation'
 
 export default {
-  props: ['wifidetail', 'addTestLocation', 'newTestLocation', 'locationindex', 'removeTestLocation', 'editTestLocation', 'editTestLo', 'testlocationindex', 'editLoSave', 'print'],
+  props: ['wifiInfo', 'tempIndex', 'wifidetail', 'addTestLocation', 'newTestLocation', 'locationindex', 'removeTestLocation', 'editTestLocation', 'editTestLo', 'testlocationindex', 'editLoSave', 'print'],
   components: {
     eachTestLocation
   },
   methods: {
     myprint: function () {
       window.print()
+    },
+    changePage: function (text) {
+      var vm = this
+      vm.$router.push(text)
     }
   }
 }
@@ -107,15 +116,14 @@ export default {
   margin-top: 5%;
 }
 .nameap {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #a6a6a6;
   border-radius: 5px;
   transition: 0.3s;
   margin-top: 5%;
-  float: center;
   background-color: white;
 }
 .tablecard {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #a6a6a6;
   border-radius: 5px;
   transition: 0.3s;
   margin-top: 5%;
@@ -132,7 +140,7 @@ export default {
 }
 .cardContainer {
   padding: 2px 16px;
-  padding-bottom: 5%;
+  padding-bottom: 1.5%;
 }
 .print  {
   float: left;

@@ -1,56 +1,64 @@
 <template lang="html">
-  <div class="col-md-12 adminContent">
-    <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
-    <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >New Access point</button>
-    <hr>
-    <div v-if="wifiInfo[tempIndex].accesspoint" class="tablecontrainer">
-      <table class="table table">
-          <thead>
-            <tr>
-              <th data-toggle="modal" data-target="#basicModal">
-                <center>
-                AP Name
-                </center>
-              </th>
-              <th>
-                <center>
-                S/N
-                </center>
-              </th>
-              <th>
-                <center>
-                MAC Address
-                </center>
-              </th>
-              <th>
-                <center>
-                Position
-                </center>
-              </th>
-              <th>
-                <center>
-                  Channel
-                </center>
-              </th>
-              <th>
-                <center>
-                More Detail
-                </center>
-              </th>
-              <th>
-                <center>
-                </center>
-              </th>
-            </tr>
-          </thead>
-          <each-access-point :wifiInfo="wifiInfo" :tempIndex="tempIndex" :removeAp="removeAp" :editAp="editAp"
-          :editaccesspoint="editaccesspoint" :apIndex="apIndex" :editApSave="editApSave" :wifidetail="wifidetail"
-          :apDetail="apDetail"></each-access-point>
-        </table>
+  <div class="col-xs-12 col-md-12 APContent">
+    <div class="col-xs-12 col-md-12">
+      <div class="" style="float:left; margin-top:1%">
+      <a @click="changePage('/dashboard')" style="cursor:pointer">Dashboard</a> / {{wifiInfo[tempIndex].projectName}}
       </div>
-      <div v-else class="col-md-12" style="margin-bottom:3%">
-        <h3>No information.</h3>
-      </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+      <h3>Project name : {{wifiInfo[tempIndex].projectName}}</h3><br>
+      <button data-toggle="modal" data-target="#basicModal" type="button" class="btn btn-primary" data-dismiss="modal" >New Access point</button>
+      <hr>
+      <div v-if="wifiInfo[tempIndex].accesspoint" class="tablecontrainer">
+        <table class="table table">
+            <thead>
+              <tr>
+                <th data-toggle="modal" data-target="#basicModal">
+                  <center>
+                  AP Name
+                  </center>
+                </th>
+                <th>
+                  <center>
+                  S/N
+                  </center>
+                </th>
+                <th>
+                  <center>
+                  MAC Address
+                  </center>
+                </th>
+                <th>
+                  <center>
+                  Position
+                  </center>
+                </th>
+                <th>
+                  <center>
+                    Channel
+                  </center>
+                </th>
+                <th>
+                  <center>
+                  More Detail
+                  </center>
+                </th>
+                <th>
+                  <center>
+                  </center>
+                </th>
+              </tr>
+            </thead>
+            <each-access-point :wifiInfo="wifiInfo" :tempIndex="tempIndex" :removeAp="removeAp" :editAp="editAp"
+            :editaccesspoint="editaccesspoint" :apIndex="apIndex" :editApSave="editApSave" :wifidetail="wifidetail"
+            :apDetail="apDetail"></each-access-point>
+          </table>
+        </div>
+        <div v-else class="col-md-12" style="margin-bottom:3%">
+          <h3>No information.</h3>
+        </div>
+    </div>
+
 
       <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="modal-dialog">
@@ -100,6 +108,12 @@ export default {
   props: ['wifiInfo', 'tempIndex', 'newAccessPoint', 'addAccessPoint', 'removeAp', 'editAp', 'editaccesspoint', 'editApSave', 'apIndex', 'wifidetail', 'apDetail', 'print'],
   components: {
     eachAccessPoint
+  },
+  methods: {
+    changePage: function (text) {
+      var vm = this
+      vm.$router.push(text)
+    }
   }
 }
 </script>
@@ -121,6 +135,13 @@ export default {
   transition: 0.3s;
   margin-top: 5%;
   float: center;
+  background-color: white;
+}
+.APContent {
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-top: 3%;
   background-color: white;
 }
 </style>
