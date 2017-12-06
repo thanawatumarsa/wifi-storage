@@ -6,7 +6,7 @@
       :editTestLocation="editTestLocation" :removeTestLocation="removeTestLocation" :locationindex="locationindex" :addTestLocation="addTestLocation"
       :newTestLocation="newTestLocation" :apDetail="apDetail" :wifidetail="wifidetail" :apIndex="apIndex" :editAp="editAp" :removeAp="removeAp"
       :addAccessPoint="addAccessPoint" :newAccessPoint="newAccessPoint" :tempIndex="tempIndex" :editApSave="editApSave" :toAccessPoint="toAccessPoint" :removeProject="removeProject"
-      :addProject="addProject" :newProject="newProject" :changePage="changePage":newRegister = "newRegister"
+      :addProject="addProject" :newProject="newProject" :changePage="changePage":newRegister = "newRegister" :jsonfields="jsonfields" :jsondata="jsondata" :jsonmeta="jsonmeta"
       :register = "register" :dataLogin="dataLogin" :signin="signin" :editaccesspoint="editaccesspoint"></router-view>
     </div>
   </div>
@@ -95,6 +95,38 @@ export default {
         {
           test: '-KyfVTBG597fkdphXDUR'
         }
+      ],
+      jsonfields: {
+        'project': 'Project',
+        'apName': 'AP Name',
+        'serial': 'Serial Number',
+        'mac': 'MAC Address',
+        'location': 'Location',
+        'channel': 'Channel',
+        'testLocation.Location': 'Test Location',
+        'testLocation.dbm': 'dbm'
+      },
+      jsondata: [
+        {
+          'name': 'Tony Peña',
+          'city': 'New York',
+          'country': 'United States',
+          'birthdate': '1978-03-15',
+          'amount': 42
+        },
+        {
+          'name': 'Thessaloniki',
+          'city': 'Athens',
+          'country': 'Greece',
+          'birthdate': '1987-11-23',
+          'amount': 42
+        }
+      ],
+      jsonmeta: [
+        [{
+          'key': 'charset',
+          'value': 'utf-8'
+        }]
       ]
     }
   },
@@ -283,13 +315,22 @@ export default {
       this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
     },
     editTestLo: function (wifi, index) {
+      var tempStr = wifi.dbm
+      var subStr = tempStr.substring(1)
       this.editTestLocation.location = wifi.location
-      this.editTestLocation.dbm = wifi.dbm
+      this.editTestLocation.dbm = subStr
+      console.log(this.editTestLocation.dbm)
       this.addTestLoIndex(index)
     },
     editLoSave: function (wifi, index) {
-      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({location: this.editTestLocation.location})
-      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({dbm: this.editTestLocation.dbm})
+      var tempdbm = {
+        location: '',
+        dbm: ''
+      }
+      tempdbm.location = this.editTestLocation.location
+      tempdbm.dbm = ('-') + this.editTestLocation.dbm
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({location: tempdbm.location})
+      wifiInfoRef.child(this.wifiInfo[this.tempIndex]['.key']).child('accesspoint').child(this.locationindex).child('testLocation').child(index).update({dbm: tempdbm.dbm})
       this.wifidetail = this.wifiInfo[this.tempIndex].accesspoint[this.locationindex]
     },
     addTestLoIndex: function (index) {
@@ -300,6 +341,9 @@ export default {
     },
     print: function () {
       printjs({printable: this.wifiInfo[this.tempIndex], properties: [this.wifiInfo[this.tempIndex].projectName], type: 'json', header: this.wifiInfo[this.tempIndex].projectName})
+    },
+    exportJson: function () {
+
     }
   },
   mounted () {

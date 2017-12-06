@@ -2,7 +2,7 @@
   <div class="dashboard">
     <div class="adminContent">
       <div class="border">
-        <h2>Dashboard</h2><br><hr>
+        <h2>Project Lists</h2><br><hr>
         <div class="row">
           <each-project :wifiInfo="wifiInfo" :toAccessPoint="toAccessPoint" :removeProject="removeProject"></each-project>
         <div class="col-xs-6 col-md-3">
@@ -22,7 +22,9 @@
           <div class="modal-body">
             <form>
                 <div class="input-group">
-                  <span class="input-group-addon" id="basic-addon1">*</span>
+                  <span class="input-group-addon" id="basic-addon1">
+                    <span class="glyphicon glyphicon-pushpin"></span>
+                  </span>
                   <input type="text" id="addProject" name="addProjectt" class="form-control" placeholder="Project name" v-model="newProject.projectName">
                 </div>
             </form>

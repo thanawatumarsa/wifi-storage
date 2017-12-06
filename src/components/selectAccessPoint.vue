@@ -5,7 +5,7 @@
         <div class="cardContainer">
           <div class="col-xs-12 col-md-12">
             <div class="" style="float:left; margin-top:1%;  margin-bottom:1%">
-            <a @click="changePage('/dashboard')" style="cursor:pointer">Dashboard</a> / <a @click="changePage('/aplists')" style="cursor:pointer">{{wifiInfo[tempIndex].projectName}}</a> / {{wifidetail.apName}}
+            <a @click="changePage('/dashboard')" style="cursor:pointer">Project</a> / <a @click="changePage('/aplists')" style="cursor:pointer">{{wifiInfo[tempIndex].projectName}}</a> / {{wifidetail.apName}}
             </div>
           </div><hr>
           <h4 style="text-align:center">Access point name</h4>
@@ -60,32 +60,52 @@
           </div>
     </div>
     <div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Add Location</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">*</span>
-                <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="newTestLocation.location">
-              </div>
-              <div class="form-group">
-
-              </div>
-              <div class="form-group">
-                <input type="number" maxlength="3" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="newTestLocation.dbm">
-              </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button @click="addTestLocation(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal" :disabled="newTestLocation.location == ''">+ Add</button>
+      <div class="col-md-12 col-xs-12">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button @click="cleardropdown()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Add Location</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4>Location</h4>
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Locations <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a @click="dropdownData('Toilet')">Toilet</a></li>
+                          <li><a @click="dropdownData('Bed')">Bed</a></li>
+                          <li><a @click="dropdownData('Bacony')">Bacony</a></li>
+                          <li><a @click="dropdownData('Entrance')">Entrance</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                      <input type="text" class="form-control" aria-label="..." v-model="newTestLocation.location">
+                    </div><!-- /input-group -->
+                    <br>
+                    <h4>dbm</h4>
+                    <div class="from-group">
+                      <div class="col-md-12 col-xs-12">
+                        <input type="range" min="30" max="100" v-model="newTestLocation.dbm"><br>
+                      </div>
+                    </div>
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">-</span>
+                    <input type="number" maxlength="3" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="newTestLocation.dbm">
+                  </div>
+                </div><!-- /.col-lg-6 -->
+              </div><!-- /.row -->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button @click="cleardropdown()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button @click="addTestLocation(wifidetail)" type="button" class="btn btn-primary" data-dismiss="modal" :disabled="newTestLocation.location == ''">+ Add</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   </div>
   </div>
 
@@ -106,6 +126,12 @@ export default {
     changePage: function (text) {
       var vm = this
       vm.$router.push(text)
+    },
+    dropdownData: function (lo) {
+      this.newTestLocation.location = lo
+    },
+    cleardropdown: function () {
+      this.newTestLocation.location = ''
     }
   }
 }

@@ -61,7 +61,7 @@
                       <div class="" style="float:left">
                         <h4>Channel</h4>
                       </div>
-                      <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="editaccesspoint.channel">
+                      <input type="number" min="1" max="30" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="editaccesspoint.channel">
                     </div>
                   </form>
                 </div>

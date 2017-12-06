@@ -38,17 +38,33 @@
               </div>
               <div class="modal-body">
                 <form>
-                    <div class="form-group">
-                      <div class="" style="float:left">
-                        <h4>Location</h4>
-                      </div>
-                      <input type="text" id="addProject" name="addProject" class="form-control" placeholder="Location" v-model="editTestLocation.location">
+                  <h4>Location</h4>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Locations <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a @click="dropdownData('Toilet')">Toilet</a></li>
+                            <li><a @click="dropdownData('Bed')">Bed</a></li>
+                            <li><a @click="dropdownData('Bacony')">Bacony</a></li>
+                            <li><a @click="dropdownData('Entrance')">Entrance</a></li>
+                          </ul>
+                        </div><!-- /btn-group -->
+                        <input type="text" class="form-control" aria-label="..." v-model="editTestLocation.location">
+                      </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                  </div><!-- /.row -->
+                  <br>
+                  <h4>dBm</h4>
+                  <div class="from-group">
+                    <div class="col-md-12 col-xs-12">
+                      <input type="range" min="30" max="100" v-model="editTestLocation.dbm"><br>
                     </div>
-                    <div class="form-group">
-                      <div class="" style="float:left">
-                        <h4>dBm</h4>
-                      </div>
-                      <input type="text" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="editTestLocation.dbm">
+                  </div>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1">-</span>
+                      <input type="number" id="addProject" name="addProject" class="form-control" placeholder="dBm" v-model="editTestLocation.dbm">
                     </div>
                   </form>
                 </div>
@@ -79,6 +95,9 @@ export default {
     clickSaveEditLo: function (wifi) {
       this.countIndex = this.testlocationindex
       this.editLoSave(wifi, this.countIndex)
+    },
+    dropdownData: function (lo) {
+      this.editTestLocation.location = lo
     }
   }
 }
