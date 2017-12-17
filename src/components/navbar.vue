@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <div class="navbar-brand" href="#">
@@ -9,7 +9,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li v-if= "chkAdmin === true && chkDashboard === false"><a @click="mgmtAdmin()" style="cursor:pointer">Admin</a></li>
-          <li v-else-if="chkAdmin === true" style="cursor:pointer"><a @click="goDashboard()">Dashboard</a></li>
+          <li v-else-if="chkAdmin === true" style="cursor:pointer"><a @click="goDashboard()">Project lists</a></li>
           <!-- <li><a @click="test" href="#">Test</a></li> -->
           <li v-if="chkLog === true"><a style="cursor:pointer" data-toggle="modal" data-target="#signout">Sign out</a></li>
         </ul>

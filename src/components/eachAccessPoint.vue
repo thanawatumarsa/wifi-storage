@@ -20,8 +20,10 @@
             <span @click="toDetailAP(wifi, index)" class="glyphicon glyphicon-search" aria-hidden="true" style="cursor:pointer"></span>
           </td>
           <td>
-            <span @click="editAp(wifi, index)" class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#basicModal2" style="cursor:pointer; float:left"></span>
-            <span @click="remove(wifi, index)" class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#basicModal3" style="cursor:pointer ; float:right"></span>
+            <div style="width:50px">
+              <span @click="editAp(wifi, index)" class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#basicModal2" style="cursor:pointer; float:left"></span>
+              <span @click="remove(wifi, index)" class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#basicModal3" style="cursor:pointer; float:right"></span>
+            </div>
           </td>
 
         <div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

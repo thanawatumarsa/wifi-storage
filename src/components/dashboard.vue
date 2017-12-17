@@ -70,7 +70,7 @@ export default {
 }
 .addProject {
   color: white;
-  background-color: #337AB7;
+  background-color: #007acc;
 }
 .addProject:hover {
   background-color: #30739c;

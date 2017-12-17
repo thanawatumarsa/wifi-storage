@@ -15,7 +15,6 @@
 <script>
 import Firebase from 'firebase'
 import Navbar from '@/components/navbar'
-import printjs from 'print-js'
 
 let config = {
   apiKey: 'AIzaSyCq9XSREG-KQz4IZgmmbcSpRYgz4HK-KpQ',
@@ -338,9 +337,6 @@ export default {
     },
     chkLogin: function () {
       this.chkLog = true
-    },
-    print: function () {
-      printjs({printable: this.wifiInfo[this.tempIndex], properties: [this.wifiInfo[this.tempIndex].projectName], type: 'json', header: this.wifiInfo[this.tempIndex].projectName})
     },
     exportJson: function () {
 
