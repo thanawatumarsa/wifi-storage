@@ -441,4 +441,11 @@ body {
 hr {
   border: 0.5px solid #a6a6a6;
 }
+@media print
+  {
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+  }
 </style>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div class="no-print">
     <nav class="navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">

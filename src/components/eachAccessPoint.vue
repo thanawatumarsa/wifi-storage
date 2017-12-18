@@ -28,8 +28,8 @@
 
         <div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
+            <div class="modal-content" style="overflow:hidden">
+              <div class="modal-header" style="background-color:#2EB82E; color: white">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Edit access point</h4>
               </div>
@@ -77,8 +77,8 @@
 
           <div class="modal fade" id="basicModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
+              <div class="modal-content" style="overflow:hidden">
+                <div class="modal-header" style="background-color:#CC0000; color:white">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4 class="modal-title" id="myModalLabel">Remove access point</h4>
                 </div>

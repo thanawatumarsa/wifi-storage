@@ -4,11 +4,11 @@
       <div class="nameap">
         <div class="cardContainer">
           <div class="col-xs-12 col-md-12">
-            <div class="" style="float:left; margin-top:1%;  margin-bottom:1%">
+            <div class="no-print" style="float:left; margin-top:1%;  margin-bottom:1%">
             <a @click="changePage('/dashboard')" style="cursor:pointer">Project</a> / <a @click="changePage('/aplists')" style="cursor:pointer">{{wifiInfo[tempIndex].projectName}}</a> / {{wifidetail.apName}}
             </div>
-          </div><hr>
-          <h4 style="text-align:center">Access point name</h4>
+          </div><hr class="no-print">
+          <h4 style="text-align:center">Access Point name</h4>
           <h3 style="text-align:center">{{wifidetail.apName}}</h3><hr>
           <h4 style="text-align:center" >S/N : {{wifidetail.serial}}</h4>
           <h4 style="text-align:center">MAC : {{wifidetail.mac}}</h4>
@@ -19,19 +19,19 @@
     </div>
     <div class="col-xs-12 col-md-8 tablecard" style="margin-top:1.5%">
         <div class="location">
-          <h3><center>Signal testing information.</center></h3><br>
-          <button data-toggle="modal" data-target="#addLocation" type="button" class="btn btn-primary" data-dismiss="modal" >New location</button>
+          <h3><center>Signal test information.</center></h3><br>
+          <button data-toggle="modal" data-target="#addLocation" type="button" class="no-print btn btn-primary" data-dismiss="modal" >New location</button>
           <hr>
         </div>
         <div v-if="wifidetail.testLocation" class="">
           <div class="col-xs-8 col-md-8" style="margin-left:-2%">
-            <div class="print">
+            <div class="no-print print">
               <a type="button" @click="myprint()" style="cursor:pointer ">
                 Print report
               </a>
             </div>
           </div>
-          <div class="col-xs-12 col-md-12" style="margin-bottom:3%">
+          <div class="no-print col-xs-12 col-md-12" style="margin-bottom:3%">
           </div>
           <table class="table table">
               <thead>
@@ -62,8 +62,8 @@
     <div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="col-md-12 col-xs-12">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
+          <div class="modal-content" style="overflow:hidden">
+            <div class="modal-header" style="background-color:#4DAEE7; color: white">
               <button @click="cleardropdown()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               <h4 class="modal-title" id="myModalLabel">Add Location</h4>
             </div>

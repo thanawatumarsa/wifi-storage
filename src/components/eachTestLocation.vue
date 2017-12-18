@@ -2,20 +2,24 @@
   <tbody>
       <tr v-for="(wifi, index) in wifidetail.testLocation">
         <td>
+          <center>
           {{wifi.location}}
+          </center>
         </td>
         <td>
+          <center>
           {{wifi.dbm}}
+        </center>
         </td>
         <td>
-          <span @click="editTestLo(wifi, index)" class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#edittest" style="cursor:pointer"></span>
+          <span @click="editTestLo(wifi, index)" class="no-print glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#edittest" style="cursor:pointer"></span>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <span @click="remove(wifi, index)" class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#remove" style="cursor:pointer"></span>
+          <span @click="remove(wifi, index)" class="no-print glyphicon glyphicon-trash" aria-hidden="true" data-toggle="modal" data-target="#remove" style="cursor:pointer"></span>
         </td>
         <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
           <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
+            <div class="modal-content" style="overflow:hidden">
+              <div class="modal-header" style="background-color:#CC0000; color:white">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Remove Location</h4>
               </div>
@@ -31,8 +35,8 @@
         </div>
         <div class="modal fade" id="edittest" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
+            <div class="modal-content" style="overflow:hidden">
+              <div class="modal-header" style="background-color:#2EB82E; color: white">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Edit Test Location</h4>
               </div>
