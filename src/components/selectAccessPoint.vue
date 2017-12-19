@@ -88,7 +88,7 @@
                     <h4>dbm</h4>
                     <div class="from-group">
                       <div class="col-md-12 col-xs-12">
-                        <input type="range" min="30" max="100" v-model="newTestLocation.dbm"><br>
+                        <input type="range" min="1" max="100" v-model="newTestLocation.dbm"><br>
                       </div>
                     </div>
                   <div class="input-group">
